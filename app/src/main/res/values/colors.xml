@@ -6,4 +6,16 @@
     <color name="white">#fff</color>
     <color name="greyish">#aaa8a8</color>
     <color name="mine_shaft">#303030</color>
+
+
+    <color name="ib_blue_primary">#4377a8</color>
+    <color name="ib_blue_primary_dark">#295781</color>
+    <color name="ib_blue_primary_dark_status_bar">#0e273e</color>
+    <color name="ib_blue_list_selection">#20446a</color>
+    <color name="ib_blue_primary_light">#9dc1e3</color>
+    <color name="ib_blue_accent">#ffcc31</color>
+    <color name="ib_blue_primary_text">#ffffff</color>
+    <color name="ib_blue_secondary_text">#cee7ff</color>
+    <color name="ib_blue_divider">#6285a5</color>
+    <color name="ib_blue_float_button">#b0ceebbe</color>
 </resources>
