@@ -12,6 +12,10 @@
         <attr name="keypadDeleteButtonSize" format="dimension" />
         <attr name="keypadShowDeleteButton" format="boolean" />
         <attr name="keypadDeleteButtonPressedColor" format="color" />
+        <attr name="keypadSubmitButtonDrawable" format="integer" />
+        <attr name="keypadSubmitButtonSize" format="dimension" />
+        <attr name="keypadShowSubmitButton" format="boolean" />
+        <attr name="keypadSubmitButtonPressedColor" format="color" />
 
         <attr name="dotEmptyBackground" format="reference" />
         <attr name="dotFilledBackground" format="reference" />

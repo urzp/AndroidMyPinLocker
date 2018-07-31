@@ -21,11 +21,13 @@ public class PinLockAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     private static final int VIEW_TYPE_NUMBER = 0;
     private static final int VIEW_TYPE_DELETE = 1;
+    private static final int VIEW_TYPE_SUBMIT = 2;
 
     private Context mContext;
     private CustomizationOptionsBundle mCustomizationOptionsBundle;
     private OnNumberClickListener mOnNumberClickListener;
     private OnDeleteClickListener mOnDeleteClickListener;
+    private OnSubmitClickListener mOnSubmitClickListener;
     private int mPinLength;
 
     private int[] mKeyValues;
@@ -43,9 +45,12 @@ public class PinLockAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         if (viewType == VIEW_TYPE_NUMBER) {
             View view = inflater.inflate(R.layout.layout_number_item, parent, false);
             viewHolder = new NumberViewHolder(view);
-        } else {
+        } else if (viewType == VIEW_TYPE_DELETE) {
             View view = inflater.inflate(R.layout.layout_delete_item, parent, false);
             viewHolder = new DeleteViewHolder(view);
+        } else {
+            View view = inflater.inflate(R.layout.layout_submit_item, parent, false);
+            viewHolder = new SubmitViewHolder(view);
         }
         return viewHolder;
     }
@@ -58,6 +63,9 @@ public class PinLockAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         } else if (holder.getItemViewType() == VIEW_TYPE_DELETE) {
             DeleteViewHolder vh2 = (DeleteViewHolder) holder;
             configureDeleteButtonHolder(vh2);
+        } else if (holder.getItemViewType() == VIEW_TYPE_SUBMIT) {
+            SubmitViewHolder vh3 = (SubmitViewHolder) holder;
+            configureSubmitButtonHolder(vh3);
         }
     }
 
@@ -111,6 +119,25 @@ public class PinLockAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         }
     }
 
+    private void configureSubmitButtonHolder(SubmitViewHolder holder) {
+        if (holder != null) {
+            if (mCustomizationOptionsBundle.isShowSubmitButton() && mPinLength > 3) {
+                holder.mSubmitButtonImage.setVisibility(View.VISIBLE);
+                if (mCustomizationOptionsBundle.getSubmitButtonDrawable() != null) {
+                    holder.mSubmitButtonImage.setImageDrawable(mCustomizationOptionsBundle.getSubmitButtonDrawable());
+                }
+                holder.mSubmitButtonImage.setColorFilter(mCustomizationOptionsBundle.getTextColor(),
+                        PorterDuff.Mode.SRC_ATOP);
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                        mCustomizationOptionsBundle.getSubmitButtonSize(),
+                        mCustomizationOptionsBundle.getSubmitButtonSize());
+                holder.mSubmitButtonImage.setLayoutParams(params);
+            } else {
+                holder.mSubmitButtonImage.setVisibility(View.GONE);
+            }
+        }
+    }
+
     @Override
     public int getItemCount() {
         return 12;
@@ -120,6 +147,9 @@ public class PinLockAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     public int getItemViewType(int position) {
         if (position == getItemCount() - 1) {
             return VIEW_TYPE_DELETE;
+        }
+        if (position == getItemCount() - 3) {
+            return VIEW_TYPE_SUBMIT;
         }
         return VIEW_TYPE_NUMBER;
     }
@@ -250,6 +280,61 @@ public class PinLockAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         }
     }
 
+    public class SubmitViewHolder extends RecyclerView.ViewHolder {
+        LinearLayout mSubmitButton;
+        ImageView mSubmitButtonImage;
+
+        public SubmitViewHolder(final View itemView) {
+            super(itemView);
+            mSubmitButton = (LinearLayout) itemView.findViewById(R.id.button);
+            mSubmitButtonImage = (ImageView) itemView.findViewById(R.id.button_submit);
+
+            if (mCustomizationOptionsBundle.isShowSubmitButton() && mPinLength > 0) {
+                mSubmitButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (mOnSubmitClickListener != null) {
+                            mOnSubmitClickListener.onSubmitClicked();
+                        }
+                    }
+                });
+
+                mSubmitButton.setOnLongClickListener(new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View v) {
+                        if (mOnSubmitClickListener != null) {
+                            mOnSubmitClickListener.onSubmitLongClicked();
+                        }
+                        return true;
+                    }
+                });
+
+                mSubmitButton.setOnTouchListener(new View.OnTouchListener() {
+                    private Rect rect;
+
+                    @Override
+                    public boolean onTouch(View v, MotionEvent event) {
+                        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                            mSubmitButtonImage.setColorFilter(mCustomizationOptionsBundle
+                                    .getSubmitButtonPressesColor());
+                            rect = new Rect(v.getLeft(), v.getTop(), v.getRight(), v.getBottom());
+                        }
+                        if (event.getAction() == MotionEvent.ACTION_UP) {
+                            mSubmitButtonImage.clearColorFilter();
+                        }
+                        if (event.getAction() == MotionEvent.ACTION_MOVE) {
+                            if (!rect.contains(v.getLeft() + (int) event.getX(),
+                                    v.getTop() + (int) event.getY())) {
+                                mSubmitButtonImage.clearColorFilter();
+                            }
+                        }
+                        return false;
+                    }
+                });
+            }
+        }
+    }
+
     public interface OnNumberClickListener {
         void onNumberClicked(int keyValue);
     }
@@ -258,5 +343,11 @@ public class PinLockAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         void onDeleteClicked();
 
         void onDeleteLongClicked();
+    }
+
+    public interface OnSubmitClickListener {
+        void onSubmitClicked();
+
+        void onSubmitLongClicked();
     }
 }

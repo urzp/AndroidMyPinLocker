@@ -15,9 +15,13 @@ public class CustomizationOptionsBundle {
     private int buttonSize;
     private Drawable buttonBackgroundDrawable;
     private Drawable deleteButtonDrawable;
+    private Drawable submitButtonDrawable;
     private int deleteButtonSize;
+    private int submitButtonSize;
     private boolean showDeleteButton;
+    private boolean showSubmitButton;
     private int deleteButtonPressesColor;
+    private int submitButtonPressesColor;
 
     public CustomizationOptionsBundle() {
     }
@@ -58,31 +62,61 @@ public class CustomizationOptionsBundle {
         return deleteButtonDrawable;
     }
 
+    public Drawable getSubmitButtonDrawable() {
+        return submitButtonDrawable;
+    }
+
     public void setDeleteButtonDrawable(Drawable deleteButtonDrawable) {
         this.deleteButtonDrawable = deleteButtonDrawable;
+    }
+
+    public void setSubmitButtonDrawable(Drawable submitButtonDrawable) {
+        this.submitButtonDrawable = submitButtonDrawable;
     }
 
     public int getDeleteButtonSize() {
         return deleteButtonSize;
     }
 
+    public int getSubmitButtonSize() {
+        return submitButtonSize;
+    }
+
     public void setDeleteButtonSize(int deleteButtonSize) {
         this.deleteButtonSize = deleteButtonSize;
+    }
+    public void setSubmitButtonSize(int submitButtonSize) {
+        this.submitButtonSize = submitButtonSize;
     }
 
     public boolean isShowDeleteButton() {
         return showDeleteButton;
     }
 
+    public boolean isShowSubmitButton() {
+        return showSubmitButton;
+    }
+
     public void setShowDeleteButton(boolean showDeleteButton) {
         this.showDeleteButton = showDeleteButton;
+    }
+
+    public void setShowSubmitButton(boolean showSubmitButton) {
+        this.showSubmitButton = showSubmitButton;
     }
 
     public int getDeleteButtonPressesColor() {
         return deleteButtonPressesColor;
     }
+    public int getSubmitButtonPressesColor() {
+        return submitButtonPressesColor;
+    }
 
     public void setDeleteButtonPressesColor(int deleteButtonPressesColor) {
         this.deleteButtonPressesColor = deleteButtonPressesColor;
+    }
+
+    public void setSubmitButtonPressesColor(int submitButtonPressesColor) {
+        this.submitButtonPressesColor = submitButtonPressesColor;
     }
 }
