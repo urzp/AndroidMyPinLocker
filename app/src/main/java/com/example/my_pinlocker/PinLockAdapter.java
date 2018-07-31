@@ -2,12 +2,10 @@ package com.example.my_pinlocker;
 
 import android.content.Context;
 import android.graphics.PorterDuff;
-import android.graphics.Rect;
 import android.os.Build;
 import android.support.v7.widget.RecyclerView;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -257,28 +255,6 @@ public class PinLockAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                     }
                 });
 
-                mDeleteButton.setOnTouchListener(new View.OnTouchListener() {
-                    private Rect rect;
-
-                    @Override
-                    public boolean onTouch(View v, MotionEvent event) {
-                        if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                            mButtonImage.setColorFilter(mCustomizationOptionsBundle
-                                    .getDeleteButtonPressesColor());
-                            rect = new Rect(v.getLeft(), v.getTop(), v.getRight(), v.getBottom());
-                        }
-                        if (event.getAction() == MotionEvent.ACTION_UP) {
-                            mButtonImage.clearColorFilter();
-                        }
-                        if (event.getAction() == MotionEvent.ACTION_MOVE) {
-                            if (!rect.contains(v.getLeft() + (int) event.getX(),
-                                    v.getTop() + (int) event.getY())) {
-                                mButtonImage.clearColorFilter();
-                            }
-                        }
-                        return false;
-                    }
-                });
             }
         }
     }
@@ -312,28 +288,7 @@ public class PinLockAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                     }
                 });
 
-                mSubmitButton.setOnTouchListener(new View.OnTouchListener() {
-                    private Rect rect;
 
-                    @Override
-                    public boolean onTouch(View v, MotionEvent event) {
-                        if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                            mSubmitButtonImage.setColorFilter(mCustomizationOptionsBundle
-                                    .getSubmitButtonPressesColor());
-                            rect = new Rect(v.getLeft(), v.getTop(), v.getRight(), v.getBottom());
-                        }
-                        if (event.getAction() == MotionEvent.ACTION_UP) {
-                            mSubmitButtonImage.clearColorFilter();
-                        }
-                        if (event.getAction() == MotionEvent.ACTION_MOVE) {
-                            if (!rect.contains(v.getLeft() + (int) event.getX(),
-                                    v.getTop() + (int) event.getY())) {
-                                mSubmitButtonImage.clearColorFilter();
-                            }
-                        }
-                        return false;
-                    }
-                });
             }
         }
     }
