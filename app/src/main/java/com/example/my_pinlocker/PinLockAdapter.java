@@ -201,6 +201,14 @@ public class PinLockAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         this.mOnDeleteClickListener = onDeleteClickListener;
     }
 
+    public OnSubmitClickListener getOnSubmitClickListener() {
+        return mOnSubmitClickListener;
+    }
+
+    public void setOnSubmitClickListener(OnSubmitClickListener onSubmitClickListener) {
+        this.mOnSubmitClickListener = onSubmitClickListener;
+    }
+
     public CustomizationOptionsBundle getCustomizationOptions() {
         return mCustomizationOptionsBundle;
     }
@@ -278,15 +286,6 @@ public class PinLockAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                     }
                 });
 
-                mSubmitButton.setOnLongClickListener(new View.OnLongClickListener() {
-                    @Override
-                    public boolean onLongClick(View v) {
-                        if (mOnSubmitClickListener != null) {
-                            mOnSubmitClickListener.onSubmitLongClicked();
-                        }
-                        return true;
-                    }
-                });
 
 
             }
@@ -306,6 +305,5 @@ public class PinLockAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     public interface OnSubmitClickListener {
         void onSubmitClicked();
 
-        void onSubmitLongClicked();
     }
 }

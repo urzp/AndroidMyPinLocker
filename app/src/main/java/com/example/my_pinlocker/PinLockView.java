@@ -131,6 +131,14 @@ public class PinLockView extends RecyclerView {
         }
     };
 
+    private PinLockAdapter.OnSubmitClickListener mOnSubmitClickListener
+            = new PinLockAdapter.OnSubmitClickListener() {
+        @Override
+        public void onSubmitClicked() {
+            mPinLockListener.onComplete(mPin);
+        }
+    };
+
     public PinLockView(Context context) {
         super(context);
         init(null, 0);
@@ -194,7 +202,7 @@ public class PinLockView extends RecyclerView {
         mAdapter = new PinLockAdapter(getContext());
         mAdapter.setOnItemClickListener(mOnNumberClickListener);
         mAdapter.setOnDeleteClickListener(mOnDeleteClickListener);
-//        mAdapter.setOnSubmitClickListener(mOnSubmitClickListener);
+        mAdapter.setOnSubmitClickListener(mOnSubmitClickListener);
         mAdapter.setCustomizationOptions(mCustomizationOptionsBundle);
         setAdapter(mAdapter);
 
