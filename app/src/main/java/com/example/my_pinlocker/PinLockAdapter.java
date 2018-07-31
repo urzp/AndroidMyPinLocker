@@ -35,7 +35,7 @@ public class PinLockAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     private int[] mKeyValues;
 
     public PinLockAdapter(Context context) {
-        this.min_pin_length =4;
+        this.min_pin_length = 4;
         this.mContext = context;
         this.mKeyValues = getAdjustKeyValues(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 0});
     }
