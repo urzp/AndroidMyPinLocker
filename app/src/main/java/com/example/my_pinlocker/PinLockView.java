@@ -51,14 +51,14 @@ public class PinLockView extends RecyclerView {
                     mAdapter.notifyItemChanged(mAdapter.getItemCount() - 1);
                 }
 
-                if (mPin.length() == 4) {
+                if (mPin.length() == mAdapter.min_pin_length) {
                     mAdapter.setPinLength(mPin.length());
                     mAdapter.notifyItemChanged(mAdapter.getItemCount() - 3);
                 }
 
                 if (mPinLockListener != null) {
                     if (mPin.length() == mPinLength) {
-                        mPinLockListener.onComplete(mPin); // complete pin
+//                        mPinLockListener.onComplete(mPin); // complete pin
                     } else {
                         mPinLockListener.onPinChange(mPin.length(), mPin);
                     }
@@ -225,7 +225,7 @@ public class PinLockView extends RecyclerView {
      *
      * @param pinLength the pin length
      */
-    public void setPinLength(int pinLength) {
+    public void setMaxPinLength(int pinLength) {
         this.mPinLength = pinLength;
 
         if (isIndicatorDotsAttached()) {
@@ -233,6 +233,10 @@ public class PinLockView extends RecyclerView {
         }
     }
 
+
+    public void setMinPinLength(int pinLength) {
+        mAdapter.min_pin_length = pinLength;
+    }
     /**
      * Get the text color in the buttons
      *

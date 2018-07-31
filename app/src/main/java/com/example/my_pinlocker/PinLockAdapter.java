@@ -19,6 +19,8 @@ import android.widget.LinearLayout;
  */
 public class PinLockAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
+    public int min_pin_length;
+
     private static final int VIEW_TYPE_NUMBER = 0;
     private static final int VIEW_TYPE_DELETE = 1;
     private static final int VIEW_TYPE_SUBMIT = 2;
@@ -33,6 +35,7 @@ public class PinLockAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     private int[] mKeyValues;
 
     public PinLockAdapter(Context context) {
+        this.min_pin_length =4;
         this.mContext = context;
         this.mKeyValues = getAdjustKeyValues(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 0});
     }
@@ -121,7 +124,7 @@ public class PinLockAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     private void configureSubmitButtonHolder(SubmitViewHolder holder) {
         if (holder != null) {
-            if (mCustomizationOptionsBundle.isShowSubmitButton() && mPinLength > 3) {
+            if (mCustomizationOptionsBundle.isShowSubmitButton() && mPinLength > this.min_pin_length - 1) {
                 holder.mSubmitButtonImage.setVisibility(View.VISIBLE);
                 if (mCustomizationOptionsBundle.getSubmitButtonDrawable() != null) {
                     holder.mSubmitButtonImage.setImageDrawable(mCustomizationOptionsBundle.getSubmitButtonDrawable());

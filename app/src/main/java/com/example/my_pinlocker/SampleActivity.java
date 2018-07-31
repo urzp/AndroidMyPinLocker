@@ -48,7 +48,8 @@ public class SampleActivity extends AppCompatActivity {
         //mPinLockView.setCustomKeySet(new int[]{2, 3, 1, 5, 9, 6, 7, 0, 8, 4});
         //mPinLockView.enableLayoutShuffling();
 
-        mPinLockView.setPinLength(4);
+        mPinLockView.setMaxPinLength(10);
+        mPinLockView.setMinPinLength(2);
         mPinLockView.setTextColor(ContextCompat.getColor(this, R.color.white));
 
         mIndicatorDots.setIndicatorType(IndicatorDots.IndicatorType.FILL_WITH_ANIMATION);
