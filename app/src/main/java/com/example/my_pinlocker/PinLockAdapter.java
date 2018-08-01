@@ -186,32 +186,17 @@ public class PinLockAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         return adjustedKeyValues;
     }
 
-    public OnNumberClickListener getOnItemClickListener() {
-        return mOnNumberClickListener;
-    }
 
     public void setOnItemClickListener(OnNumberClickListener onNumberClickListener) {
         this.mOnNumberClickListener = onNumberClickListener;
-    }
-
-    public OnDeleteClickListener getOnDeleteClickListener() {
-        return mOnDeleteClickListener;
     }
 
     public void setOnDeleteClickListener(OnDeleteClickListener onDeleteClickListener) {
         this.mOnDeleteClickListener = onDeleteClickListener;
     }
 
-    public OnSubmitClickListener getOnSubmitClickListener() {
-        return mOnSubmitClickListener;
-    }
-
     public void setOnSubmitClickListener(OnSubmitClickListener onSubmitClickListener) {
         this.mOnSubmitClickListener = onSubmitClickListener;
-    }
-
-    public CustomizationOptionsBundle getCustomizationOptions() {
-        return mCustomizationOptionsBundle;
     }
 
     public void setCustomizationOptions(CustomizationOptionsBundle customizationOptionsBundle) {

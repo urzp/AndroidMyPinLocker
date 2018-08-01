@@ -105,13 +105,6 @@ public class CustomizationOptionsBundle {
         this.showSubmitButton = showSubmitButton;
     }
 
-    public int getDeleteButtonPressesColor() {
-        return deleteButtonPressesColor;
-    }
-    public int getSubmitButtonPressesColor() {
-        return submitButtonPressesColor;
-    }
-
     public void setDeleteButtonPressesColor(int deleteButtonPressesColor) {
         this.deleteButtonPressesColor = deleteButtonPressesColor;
     }

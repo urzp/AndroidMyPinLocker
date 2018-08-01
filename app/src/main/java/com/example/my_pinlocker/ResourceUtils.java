@@ -1,10 +1,8 @@
 package com.example.my_pinlocker;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DimenRes;
-import android.support.annotation.DrawableRes;
 import android.support.v4.content.ContextCompat;
 
 /**
@@ -24,7 +22,4 @@ public class ResourceUtils {
         return context.getResources().getDimension(id);
     }
 
-    public static Drawable getDrawable(Context context, @DrawableRes int id) {
-        return ContextCompat.getDrawable(context, id);
-    }
 }

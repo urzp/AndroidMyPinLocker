@@ -15,8 +15,6 @@ import android.util.AttributeSet;
  */
 public class PinLockView extends RecyclerView {
 
-    private static final int[] DEFAULT_KEY_SET = {1, 2, 3, 4, 5, 6, 7, 8, 9, 0};
-
     private String mPin = "";
     private int mHorizontalSpacing, mVerticalSpacing;
     private int mTextColor, mDeleteButtonPressedColor,  mSubmitButtonPressedColor;
@@ -29,7 +27,6 @@ public class PinLockView extends RecyclerView {
     private PinLockAdapter mAdapter;
     private PinLockListener mPinLockListener;
     private CustomizationOptionsBundle mCustomizationOptionsBundle;
-    private int[] mCustomKeySet;
 
     private PinLockAdapter.OnNumberClickListener mOnNumberClickListener
             = new PinLockAdapter.OnNumberClickListener() {
@@ -201,29 +198,14 @@ public class PinLockView extends RecyclerView {
         setOverScrollMode(OVER_SCROLL_NEVER);
     }
 
-    /**
-     * Sets a {@link PinLockListener} to the to listen to pin update events
-     *
-     * @param pinLockListener the listener
-     */
     public void setPinLockListener(PinLockListener pinLockListener) {
         this.mPinLockListener = pinLockListener;
     }
 
-    /**
-     * Get the length of the current pin length
-     *
-     * @return the length of the pin
-     */
     public int getPinLength() {
         return mAdapter.max_pin_length;
     }
 
-    /**
-     * Sets the pin length dynamically
-     *
-     * @param pinLength the pin length
-     */
     public void setMaxPinLength(int pinLength) {
         mAdapter.max_pin_length = pinLength;
 
@@ -232,198 +214,38 @@ public class PinLockView extends RecyclerView {
         }
     }
 
-
     public void setMinPinLength(int pinLength) {
         mAdapter.min_pin_length = pinLength;
     }
-    /**
-     * Get the text color in the buttons
-     *
-     * @return the text color
-     */
+
     public int getTextColor() {
         return mTextColor;
     }
 
-    /**
-     * Set the text color of the buttons dynamically
-     *
-     * @param textColor the text color
-     */
     public void setTextColor(int textColor) {
         this.mTextColor = textColor;
         mCustomizationOptionsBundle.setTextColor(textColor);
         mAdapter.notifyDataSetChanged();
     }
 
-    /**
-     * Get the size of the text in the buttons
-     *
-     * @return the size of the text in pixels
-     */
     public int getTextSize() {
         return mTextSize;
     }
 
-    /**
-     * Set the size of text in pixels
-     *
-     * @param textSize the text size in pixels
-     */
     public void setTextSize(int textSize) {
         this.mTextSize = textSize;
         mCustomizationOptionsBundle.setTextSize(textSize);
         mAdapter.notifyDataSetChanged();
     }
 
-    /**
-     * Get the size of the pin buttons
-     *
-     * @return the size of the button in pixels
-     */
-    public int getButtonSize() {
-        return mButtonSize;
-    }
-
-    /**
-     * Set the size of the pin buttons dynamically
-     *
-     * @param buttonSize the button size
-     */
-    public void setButtonSize(int buttonSize) {
-        this.mButtonSize = buttonSize;
-        mCustomizationOptionsBundle.setButtonSize(buttonSize);
-        mAdapter.notifyDataSetChanged();
-    }
-
-    /**
-     * Get the current background drawable of the buttons, can be null
-     *
-     * @return the background drawable
-     */
-    public Drawable getButtonBackgroundDrawable() {
-        return mButtonBackgroundDrawable;
-    }
-
-    /**
-     * Set the background drawable of the buttons dynamically
-     *
-     * @param buttonBackgroundDrawable the background drawable
-     */
-    public void setButtonBackgroundDrawable(Drawable buttonBackgroundDrawable) {
-        this.mButtonBackgroundDrawable = buttonBackgroundDrawable;
-        mCustomizationOptionsBundle.setButtonBackgroundDrawable(buttonBackgroundDrawable);
-        mAdapter.notifyDataSetChanged();
-    }
-
-    /**
-     * Get the drawable of the delete button
-     *
-     * @return the delete button drawable
-     */
-    public Drawable getDeleteButtonDrawable() {
-        return mDeleteButtonDrawable;
-    }
-
-    /**
-     * Set the drawable of the delete button dynamically
-     *
-     * @param deleteBackgroundDrawable the delete button drawable
-     */
-    public void setDeleteButtonDrawable(Drawable deleteBackgroundDrawable) {
-        this.mDeleteButtonDrawable = deleteBackgroundDrawable;
-        mCustomizationOptionsBundle.setDeleteButtonDrawable(deleteBackgroundDrawable);
-        mAdapter.notifyDataSetChanged();
-    }
-
-    /**
-     * Get the delete button size in pixels
-     *
-     * @return size in pixels
-     */
-    public int getDeleteButtonSize() {
-        return mDeleteButtonSize;
-    }
-
-    /**
-     * Set the size of the delete button in pixels
-     *
-     * @param deleteButtonSize size in pixels
-     */
-    public void setDeleteButtonSize(int deleteButtonSize) {
-        this.mDeleteButtonSize = deleteButtonSize;
-        mCustomizationOptionsBundle.setDeleteButtonSize(deleteButtonSize);
-        mAdapter.notifyDataSetChanged();
-    }
-
-    /**
-     * Is the delete button shown
-     *
-     * @return returns true if shown, false otherwise
-     */
     public boolean isShowDeleteButton() {
         return mShowDeleteButton;
-    }
-
-    /**
-     * Dynamically set if the delete button should be shown
-     *
-     * @param showDeleteButton true if the delete button should be shown, false otherwise
-     */
-    public void setShowDeleteButton(boolean showDeleteButton) {
-        this.mShowDeleteButton = showDeleteButton;
-        mCustomizationOptionsBundle.setShowDeleteButton(showDeleteButton);
-        mAdapter.notifyDataSetChanged();
-    }
-
-    /**
-     * Get the delete button pressed/focused state color
-     *
-     * @return color of the button
-     */
-    public int getDeleteButtonPressedColor() {
-        return mDeleteButtonPressedColor;
-    }
-
-    /**
-     * Set the pressed/focused state color of the delete button
-     *
-     * @param deleteButtonPressedColor the color of the delete button
-     */
-    public void setDeleteButtonPressedColor(int deleteButtonPressedColor) {
-        this.mDeleteButtonPressedColor = deleteButtonPressedColor;
-        mCustomizationOptionsBundle.setDeleteButtonPressesColor(deleteButtonPressedColor);
-        mAdapter.notifyDataSetChanged();
-    }
-
-    public int[] getCustomKeySet() {
-        return mCustomKeySet;
-    }
-
-    public void setCustomKeySet(int[] customKeySet) {
-        this.mCustomKeySet = customKeySet;
-
-        if (mAdapter != null) {
-            mAdapter.setKeyValues(customKeySet);
-        }
-    }
-
-    public void enableLayoutShuffling() {
-        this.mCustomKeySet = ShuffleArrayUtils.shuffle(DEFAULT_KEY_SET);
-
-        if (mAdapter != null) {
-            mAdapter.setKeyValues(mCustomKeySet);
-        }
     }
 
     private void clearInternalPin() {
         mPin = "";
     }
 
-    /**
-     * Resets the {@link PinLockView}, clearing the entered pin
-     * and resetting the {@link IndicatorDots} if attached
-     */
     public void resetPinLockView() {
 
         clearInternalPin();
@@ -437,20 +259,10 @@ public class PinLockView extends RecyclerView {
         }
     }
 
-    /**
-     * Returns true if {@link IndicatorDots} are attached to {@link PinLockView}
-     *
-     * @return true if attached, false otherwise
-     */
     public boolean isIndicatorDotsAttached() {
         return mIndicatorDots != null;
     }
 
-    /**
-     * Attaches {@link IndicatorDots} to {@link PinLockView}
-     *
-     * @param mIndicatorDots the view to attach
-     */
     public void attachIndicatorDots(IndicatorDots mIndicatorDots) {
         this.mIndicatorDots = mIndicatorDots;
     }

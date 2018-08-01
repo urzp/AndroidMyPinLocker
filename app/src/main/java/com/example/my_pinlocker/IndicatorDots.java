@@ -29,7 +29,7 @@ public class IndicatorDots extends LinearLayout {
         int FILL_WITH_ANIMATION = 2;
     }
 
-    private static final int DEFAULT_PIN_LENGTH = 4;
+    private static final int DEFAULT_PIN_LENGTH = 10;
 
     private int mDotDiameter;
     private int mDotSpacing;
