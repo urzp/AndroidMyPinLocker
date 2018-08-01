@@ -9,19 +9,15 @@ import android.util.AttributeSet;
 
 /**
  * Represents a numeric lock view which can used to taken numbers as input.
- * The length of the input can be customized using {@link PinLockView#setPinLength(int)}, the default value being 4
- * <p/>
  * It can also be used as dial pad for taking number inputs.
  * Optionally, {@link IndicatorDots} can be attached to this view to indicate the length of the input taken
  * Created by aritraroy on 31/05/16.
  */
 public class PinLockView extends RecyclerView {
 
-    private static final int DEFAULT_PIN_LENGTH = 10;
     private static final int[] DEFAULT_KEY_SET = {1, 2, 3, 4, 5, 6, 7, 8, 9, 0};
 
     private String mPin = "";
-    private int mPinLength; // min lengt of pin
     private int mHorizontalSpacing, mVerticalSpacing;
     private int mTextColor, mDeleteButtonPressedColor,  mSubmitButtonPressedColor;
     private int mTextSize, mButtonSize, mDeleteButtonSize, mSubmitButtonSize;
@@ -57,11 +53,7 @@ public class PinLockView extends RecyclerView {
                 }
 
                 if (mPinLockListener != null) {
-                    if (mPin.length() == mPinLength) {
-//                        mPinLockListener.onComplete(mPin); // complete pin
-                    } else {
                         mPinLockListener.onPinChange(mPin.length(), mPin);
-                    }
                 }
             } else {
                 if (!isShowDeleteButton()) {
@@ -159,7 +151,6 @@ public class PinLockView extends RecyclerView {
         TypedArray typedArray = getContext().obtainStyledAttributes(attributeSet, R.styleable.PinLockView);
 
         try {
-            mPinLength = typedArray.getInt(R.styleable.PinLockView_pinLength, DEFAULT_PIN_LENGTH);
             mHorizontalSpacing = (int) typedArray.getDimension(R.styleable.PinLockView_keypadHorizontalSpacing, ResourceUtils.getDimensionInPx(getContext(), R.dimen.default_horizontal_spacing));
             mVerticalSpacing = (int) typedArray.getDimension(R.styleable.PinLockView_keypadVerticalSpacing, ResourceUtils.getDimensionInPx(getContext(), R.dimen.default_vertical_spacing));
             mTextColor = typedArray.getColor(R.styleable.PinLockView_keypadTextColor, ResourceUtils.getColor(getContext(), R.color.white));
@@ -225,7 +216,7 @@ public class PinLockView extends RecyclerView {
      * @return the length of the pin
      */
     public int getPinLength() {
-        return mPinLength;
+        return mAdapter.max_pin_length;
     }
 
     /**
@@ -234,7 +225,7 @@ public class PinLockView extends RecyclerView {
      * @param pinLength the pin length
      */
     public void setMaxPinLength(int pinLength) {
-        this.mPinLength = pinLength;
+        mAdapter.max_pin_length = pinLength;
 
         if (isIndicatorDotsAttached()) {
             mIndicatorDots.setPinLength(pinLength);

@@ -18,6 +18,7 @@ import android.widget.LinearLayout;
 public class PinLockAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     public int min_pin_length;
+    public int max_pin_length;
 
     private static final int VIEW_TYPE_NUMBER = 0;
     private static final int VIEW_TYPE_DELETE = 1;
